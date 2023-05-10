@@ -31,13 +31,11 @@ bool signUp(const std::string& username, const std::vector<std::string>& existin
     // Check if the username is already taken
     if (std::find(existingUsernames.begin(), existingUsernames.end(), username) != existingUsernames.end()) {
         return true;
+    } else {
+        return false;
     }
-    
-        else {
-            return false;
-        }
-    
 }
+
 bool createUser(const User& user) {
     // Validate user input and save the user to a file or database
     // Return true if the user is successfully created, false otherwise
@@ -79,6 +77,20 @@ void displayDashboard(const std::string& username) {
     // Implement the functionality to display the user's dashboard, including various sections and options
 }
 
+void signIn() {
+    cout << "\t\tLOGIN PAGE" << endl;
+    std::cout << "Enter username: ";
+    std::cin >> username;
+    std::cout << "Enter password: ";
+    std::cin >> password;
+    if (validateUser(username, password)) {
+        std::cout << "Login successful!" << std::endl;
+        displayDashboard(username);
+    } else {
+        std::cout << "Invalid username or password. Please try again." << std::endl;
+    }
+}
+
 int main() {
     // Sample code to demonstrate user registration, login, and dashboard functionality
 
@@ -89,7 +101,7 @@ int main() {
         std::cout << "1. Sign Up" << std::endl;
         std::cout << "2. Log In" << std::endl;
         std::cout << "0. Exit" << std::endl;
-        std::cout << "Enter your choice: ";
+                std::cout << "Enter your choice: ";
         std::cin >> choice;
 
         if (choice == 1) {
@@ -97,12 +109,12 @@ int main() {
             std::string username, password, name, email;
             std::cout << "Enter username: ";
             std::cin >> username;
-            bool value = signUp(username, existingUsernames);
-            while (value == true) {
-                std::cout << "Enter username: ";
-            std::cin >> username;
-            bool value = signUp(username, existingUsernames);
-                }
+            bool isUsernameTaken = signUp(username, existingUsernames);
+            while (isUsernameTaken) {
+                std::cout << "Username already taken. Please enter a different username: ";
+                std::cin >> username;
+                isUsernameTaken = signUp(username, existingUsernames);
+            }
             std::cout << "Enter password: ";
             std::cin >> password;
             std::cout << "Enter name: ";
@@ -113,61 +125,24 @@ int main() {
             User newUser{ username, password, name, email };
             if (createUser(newUser)) {
                 std::cout << "User created successfully!" << std::endl;
-                
-                cout << "\t\tLOGIN PAGE" << endl;
-                std::cout << "Enter username: ";
-                std::cin >> username;
-                std::cout << "Enter password: ";
-                std::cin >> password;        
-                if (validateUser(username, password)) {
-                std::cout << "Login successful!" << std::endl;
-                displayDashboard(username);
+                signIn();  // Automatically sign in the user after successful registration
                 break;
-            // Implement the functionality to display the user's dashboard
-    
-        }
-        else {
-            std::cout << "Invalid username or password. Please try again." << std::endl;
-        }
             } else {
                 std::cout << "Failed to create user. Please try again." << std::endl;
-}
-}
-else if (choice == 0) {
-    cout << "\nYou have successfully exited the software";
+            }
+        } else if (choice == 2) {
+            signIn();
+            break;
+        } else if (choice == 0) {
+            cout << "\nYou have successfully exited the software";
+            return 0;
+        } else {
+            cout << "Invalid choice. Please try again." << endl;
+        }
+    } while (choice != 0);
+
+    //std::cout << "Thank you for using Ifediba3D: Automate Your Small Business!" << std::endl;
+
     return 0;
 }
-} while (choice != 2);
 
-//std::cout << "Thank you for using Ifediba3D: Automate Your Small Business!" << std::endl;
-if (choice == 2) {
-std::cout << "Enter username: ";
-std::cin >> username;
-std::cout << "Enter password: ";
-std::cin >> password;        
-    if (validateUser(username, password)) {
-            std::cout << "Login successful!" << std::endl;
-            displayDashboard(username);
-            // Implement the functionality to display the user's dashboard
-        } else {
-            std::cout << "Invalid username or password. Please try again." << std::endl;
-        }
-    }
-
-
-
-        if (validateUser(username, password)) {
-            std::cout << "Login successful!" << std::endl;
-            displayDashboard(username);
-            // Implement the functionality to display the user's dashboard
-        } else {
-            std::cout << "Invalid username or password. Please try again." << std::endl;
-        }
-    }
- //while (choice != 0);
-
-
-
-
-                
-               
