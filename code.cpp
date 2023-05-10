@@ -6,6 +6,19 @@ using namespace std;
 
 string username, password;
 
+std::vector<std::string> getUsernamesFromFile(const std::string& filename) {
+    std::vector<std::string> usernames;
+    std::ifstream file(filename);
+    if (file.is_open()) {
+        std::string username;
+        while (std::getline(file, username)) {
+            usernames.push_back(username);
+        }
+        file.close();
+    }
+    return usernames;
+}
+
 struct User {
     string username;
     std::string password;
