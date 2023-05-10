@@ -7,6 +7,28 @@ using namespace std;
 
 string username, password;
 
+void userDashBoard() {
+int userChoice;
+cout << "This is your dashboard "<< username <<endl;
+cout << "Select what you want to do today\n\n\t[1]. Create\n\t[2]. My Works\n\t[3]. My Inventories";
+
+cin >> userChoice;
+
+switch(userChoice) {
+case userChoice == 1:
+    cout << "\nThis feature is not available for this software version";
+    break;
+case userChoice == 2:
+    cout << "No Work To Show Here...";
+    break;
+case userChoice == 3:
+    cout << "You have not added any inventory.";
+    break;
+default:
+    cout << "You entered an invalid input...\n";
+}
+}
+
 std::vector<std::string> getUsernamesFromFile(const std::string& filename) {
     std::vector<std::string> usernames;
     std::ifstream file(filename);
@@ -76,6 +98,7 @@ void displayDashboard(const std::string& username) {
     // Display the user's dashboard
     std::cout << "Welcome, " << username << "!" << std::endl;
     // Implement the functionality to display the user's dashboard, including various sections and options
+    userDashBoard();
 }
 
 void signIn() {
